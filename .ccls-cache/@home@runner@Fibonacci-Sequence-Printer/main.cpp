@@ -16,7 +16,6 @@ int main() {
   while (n != SENTINEL) {
     cout << "Enter the number of Fibonacci Numbers to Print\n"
       << "Enter " << SENTINEL << " to exit\nSelection >> ";
-
     cin >> n;
 
     if (n == SENTINEL) {
@@ -27,7 +26,6 @@ int main() {
     }
   }
   
-
   return 0;
 }
 
