@@ -1,11 +1,13 @@
 #include <iostream>
 #include <iomanip>
+#include <limits>
 using namespace std;
 
 const int MAX = 93; // Maxmimum number of fibonacci numbers to print
 const int SENTINEL = 999;
 
 void fibo(int numVals);
+void purgeInputErrors();
 
 int main() {
   // Variable Declaration
@@ -16,16 +18,25 @@ int main() {
   while (n != SENTINEL) {
     cout << "Enter the number of Fibonacci Numbers to Print\n"
       << "Enter " << SENTINEL << " to exit\nSelection >> ";
-    cin >> n;
-
-    if (n == SENTINEL) {
-      cout << "\nGoodbye!\nProgram Terminated Successfully\n";
+    
+    if(!(cin >> n)) {
+      purgeInputErrors();
     }
     else {
-      fibo(n);
+      if (n == SENTINEL) {
+        cout << "\nGoodbye!\n";
+      }
+      else if (n < 0 || n > MAX) {
+        cout << "\nError: Please ensure n is a positive integer less than "
+          << MAX << " and try again\n\n";
+      }
+      else {
+        fibo(n);
+      }
     }
   }
-  
+
+  cout << "Program Terminated Successfully\n";
   return 0;
 }
 
@@ -49,4 +60,11 @@ void fibo(int numVals) {
     }
   }
   cout << endl;
+}
+
+// Handle input errors
+void purgeInputErrors() {
+  cin.clear();
+  cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  cout << "\nError: Invalid Input\n\n";
 }
